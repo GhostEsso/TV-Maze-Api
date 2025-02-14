@@ -1,0 +1,44 @@
+.dynCom {
+  width: 100%;
+  margin-top: var(--spacing-lg);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+th, td {
+  padding: var(--spacing-sm);
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 500;
+}
+
+tr:hover {
+  background-color: #f8f9fa;
+}
+
+.cCount {
+  margin: var(--spacing-md) 0;
+  color: var(--text-color);
+  font-size: 1.1rem;
+}
+
+.itemSection {
+  margin: var(--spacing-lg) 0;
+}
+
+.itemSection h4 {
+  color: var(--text-color);
+  margin-bottom: var(--spacing-sm);
+  font-family: var(--font-primary);
+} 

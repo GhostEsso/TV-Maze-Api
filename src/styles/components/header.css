@@ -1,0 +1,40 @@
+header {
+  display: flex;
+  flex-direction: row;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  justify-content: center;
+  background-color: white;
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+}
+
+header nav {
+  width: 100%;
+  max-width: 1200px;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xl);
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-family: var(--font-primary);
+  font-weight: 500;
+  transition: color 0.3s ease;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+}
+
+header nav ul li a:hover {
+  color: var(--primary-color);
+}
+
+header nav ul li:first-child a {
+  font-weight: 600;
+  color: var(--primary-color);
+} 

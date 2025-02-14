@@ -45,10 +45,18 @@ const display = async () => {
       img.height = 300;
 
       heartIcon.classList.add('far', 'fa-heart');
+      if (totalLikesPerMovie[element.id] > 0) {
+        heartIcon.classList.remove('far');
+        heartIcon.classList.add('fas');
+        heartIcon.classList.add('liked');
+      }
       heartIcon.setAttribute('data-item-id', element.id);
 
       heartIcon.addEventListener('click', async (event) => {
-        const itemId = event.target.getAttribute('data-item-id'); // Get the item_id from the custom attribute
+        const itemId = event.target.getAttribute('data-item-id');
+
+        event.target.classList.remove('far');
+        event.target.classList.add('fas', 'liked');
 
         let likesInfo = likesData.find((likes) => likes.item_id === itemId);
 

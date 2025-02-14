@@ -3,31 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Faisal & Esso TV Shows</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-   <header>
-        <nav>
-            <ul>
-                <li><a href="#" id="cardNum"></a></li>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="5" y="10" width="40" height="30" rx="3" fill="#3498db"/>
+                    <rect x="10" y="15" width="30" height="20" rx="2" fill="white"/>
+                    <circle cx="25" cy="25" r="5" fill="#3498db"/>
+                    <rect x="15" y="35" width="20" height="2" rx="1" fill="white"/>
+                </svg>
+                <span>TV Shows</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#" id="cardNum" class="active">Shows(16)</a></li>
                 <li><a href="#">Movies</a></li>
                 <li><a href="#">Series</a></li>
                 <li><a href="#">Music</a></li>
             </ul>
-        </nav>
-   </header>
-   <section class="cards-con">
-    <div class="cards" id="container">
-    </div>
-   </section>
-    <footer contentEditable>
-         Created by @ Faisal and Essohanam
+        </div>
+    </nav>
+
+    <main>
+        <section class="cards-con">
+            <div class="cards" id="container">
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        Created by @ Faisal and Essohanam
     </footer>
-<script src="./index.js" type="module"></script>
+    <script src="./index.js" type="module"></script>
 </body>
 </html>
