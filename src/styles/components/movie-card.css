@@ -1,0 +1,129 @@
+/* Conteneur principal - Mobile first */
+.movies-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Style de base des cartes */
+.movie {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+}
+
+/* Image du film */
+.movie img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
+
+/* Section titre et boutons */
+.sect {
+  padding: var(--spacing-md);
+  background: white;
+  text-align: center;
+}
+
+.sect p {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Bouton Comments */
+.anc {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  text-decoration: none;
+  color: var(--primary-color);
+  font-weight: 500;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: rgba(52, 152, 219, 0.1);
+  border-radius: var(--border-radius-full);
+}
+
+.anc::before {
+  content: '\f075';
+  font-family: 'Font Awesome 5 Free';
+  font-size: 0.9rem;
+}
+
+/* Compteur de likes */
+.heartCount {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  background: rgba(255, 255, 255, 0.95);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--border-radius-full);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  box-shadow: var(--shadow-sm);
+  margin-left: 1.5rem;
+}
+
+.fa-heart {
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.fa-heart.liked,
+.fas.fa-heart {
+  color: var(--error-color);
+}
+
+.add {
+  font-weight: 600;
+  color: var(--text-color);
+  min-width: 1.8rem;
+  text-align: center;
+  font-size: 1rem;
+  margin-left: 1rem;
+}
+
+/* Animation du compteur */
+@keyframes likeIncrement {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.add.increment {
+  animation: likeIncrement 0.3s ease;
+}
+
+:root {
+  --border-radius-full: 9999px;
+}
+
+/* Tablette (>768px) */
+@media screen and (min-width: 768px) {
+  .movies-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 900px;
+  }
+}
+
+/* Desktop (>1024px) */
+@media screen and (min-width: 1024px) {
+  .movies-container {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1400px;
+  }
+} 

@@ -1,0 +1,238 @@
+.model {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-md);
+}
+
+.cItems {
+  position: relative;
+  width: 90%;
+  max-width: 800px;
+  max-height: 85vh;
+  background: white;
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--spacing-lg);
+  align-items: start;
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+.commentImg {
+  grid-column: 1;
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: var(--border-radius-md);
+  margin: 0 auto;
+}
+
+.itemSection {
+  text-align: center;
+  margin: var(--spacing-md) 0;
+}
+
+.itemSection h4 {
+  color: var(--text-color);
+  margin-bottom: var(--spacing-xs);
+  font-size: 1.2rem;
+}
+
+.close {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  font-size: 1.5rem;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.close:hover {
+  transform: rotate(90deg);
+  color: var(--error-color);
+  background: rgba(231, 76, 60, 0.1);
+}
+
+.inpSect {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  background: var(--background-color);
+  border-radius: var(--border-radius-md);
+}
+
+.inptxt {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius-sm);
+  font-family: var(--font-primary);
+  transition: border-color 0.3s ease;
+}
+
+.inptxt:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.subBtn {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.subBtn:hover {
+  background: darken(var(--primary-color), 10%);
+  transform: translateY(-2px);
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dynCom {
+  grid-column: 1 / -1;
+  margin-top: var(--spacing-lg);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  background: white;
+}
+
+.dynCom table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--spacing-md);
+}
+
+.dynCom th,
+.dynCom td {
+  padding: var(--spacing-sm);
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.dynCom th {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 500;
+}
+
+.dynCom tr:hover {
+  background-color: rgba(52, 152, 219, 0.05);
+}
+
+.cCount {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  margin: var(--spacing-md) 0;
+  text-align: center;
+  font-weight: 500;
+}
+
+.comment-content {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+  .model {
+    padding: var(--spacing-sm);
+  }
+
+  .cItems {
+    grid-template-columns: 1fr;
+    padding: var(--spacing-md);
+    gap: var(--spacing-md);
+    max-height: 90vh;
+  }
+
+  .commentImg {
+    width: 180px;
+    height: 270px;
+    margin: 0 auto;
+  }
+
+  .comment-content {
+    grid-column: 1;
+    text-align: center;
+  }
+
+  .inpSect {
+    padding: var(--spacing-md);
+  }
+
+  .dynCom {
+    overflow-x: auto;
+  }
+
+  .dynCom table {
+    font-size: 0.9rem;
+  }
+
+  .close {
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .cItems {
+    padding: var(--spacing-sm);
+  }
+
+  .commentImg {
+    width: 150px;
+    height: 225px;
+  }
+
+  .itemSection h4 {
+    font-size: 1rem;
+  }
+
+  .inptxt {
+    font-size: 0.9rem;
+  }
+
+  .dynCom table th,
+  .dynCom table td {
+    padding: var(--spacing-xs);
+    font-size: 0.8rem;
+  }
+} 

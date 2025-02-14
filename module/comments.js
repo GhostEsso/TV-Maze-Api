@@ -4,137 +4,141 @@ import countComments from './countComments.js';
 
 const container = document.getElementById('container');
 
-// Function to display the comments popup
 const popup = async (mId, image, name, genre, language) => {
-  // Get the comments data for the given mId
   const commentData = await getComments(mId);
-
-  const commentContainer = document.createElement('div');
-  const commentItems = document.createElement('div');
-  const cCount = document.createElement('h3');
-  cCount.classList.add('cCount');
-
   const comCount = await countComments(mId);
 
-  const dynCom = document.createElement('div');
-  const tbl = document.createElement('table');
-  dynCom.classList.add('dynCom');
+  // Créer la structure de base du popup
+  const commentContainer = document.createElement('div');
+  const commentItems = document.createElement('div');
   commentContainer.classList.add('model');
   commentItems.classList.add('cItems');
-  const cross = document.createElement('i');
-  cross.classList.add('close', 'fa', 'fa-close');
-  commentItems.appendChild(cross);
-  commentContainer.setAttribute('id', 'myModal');
-  commentContainer.style.display = 'block';
-  container.appendChild(commentContainer);
-  const trH = document.createElement('tr');
-  const th1 = document.createElement('th');
-  th1.textContent = 'Date';
-  const th2 = document.createElement('th');
-  th2.textContent = 'User';
-  const th3 = document.createElement('th');
-  th3.textContent = 'Comment';
-  trH.appendChild(th1);
-  trH.appendChild(th2);
-  trH.appendChild(th3);
 
-  tbl.appendChild(trH);
-  if (Array.isArray(commentData)) {
-    commentData.forEach((element) => {
-      const tr = document.createElement('tr');
-      const dat = document.createElement('td');
-      const usr = document.createElement('td');
-      const com = document.createElement('td');
-      dat.textContent = element.creation_date;
-      usr.textContent = element.username;
-      com.textContent = element.comment;
-      tr.appendChild(dat);
-      tr.appendChild(usr);
-      tr.appendChild(com);
-      tbl.appendChild(tr);
-    });
-    cCount.textContent = `Total Comments :${comCount}`;
-    dynCom.appendChild(tbl);
-  } else {
-    const noCommentsMsg = document.createElement('p');
-    noCommentsMsg.textContent = 'No comments available.';
-    dynCom.appendChild(noCommentsMsg);
-  }
+  // Créer une div pour le contenu des commentaires
+  const commentContent = document.createElement('div');
+  commentContent.classList.add('comment-content');
 
-  cross.onclick = function () {
-    commentContainer.style.display = 'none';
-  };
-
+  // Image
   const img = document.createElement('img');
-  const nameTag = document.createElement('h4');
-  const languageTag = document.createElement('h4');
-  const genreTag = document.createElement('h4');
-  const brTag = document.createElement('br');
-  nameTag.textContent = `MovieName: ${name}`;
-  languageTag.textContent = `Language: ${language}`;
-  const content = `Genre: ${genre.join(', ')}`;
-  genreTag.textContent = content;
-
-  const itemsSection = document.createElement('section');
-  itemsSection.classList.add('itemSection');
-
   img.classList.add('commentImg');
   img.src = image;
-  img.alt = 'no img found';
-  const inpSect = document.createElement('section');
-  inpSect.innerHTML = `<section class="inpSect"><br><br><h4>Your Review</h4><br><input type="text" class="inptxt" id="inpIdName" placeholder="Your Name"  maxlength="15"><br><br>
-  <input type="text" class="inptxt" id="revId" placeholder="Your Comment" maxlength="30"><br><br>
-  <input id="submitBtn"class="subBtn"type="submit" value="Submit"></section>`;
+  img.alt = 'Movie poster';
 
-  // Add event listener to the submit button to handle comment submission
+  // Informations du film
+  const movieInfo = document.createElement('div');
+  movieInfo.classList.add('itemSection');
+  movieInfo.innerHTML = `
+    <h4>MovieName: ${name}</h4>
+    <h4>Language: ${language}</h4>
+    <h4>Genre: ${genre.join(', ')}</h4>
+  `;
 
-  // Add event listener to the submit button using event delegation
+  // Compteur de commentaires
+  const cCount = document.createElement('h3');
+  cCount.classList.add('cCount');
+  cCount.textContent = `Total Comments: ${comCount}`;
+
+  // Section des commentaires
+  const dynCom = document.createElement('div');
+  dynCom.classList.add('dynCom');
+
+  // Créer la table des commentaires
+  const table = document.createElement('table');
+  const tableHeader = document.createElement('tr');
+  tableHeader.innerHTML = `
+    <th>Date</th>
+    <th>User</th>
+    <th>Comment</th>
+  `;
+  table.appendChild(tableHeader);
+
+  // Ajouter les commentaires s'ils existent
+  if (Array.isArray(commentData) && commentData.length > 0) {
+    commentData.forEach((comment) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${comment.creation_date}</td>
+        <td>${comment.username}</td>
+        <td>${comment.comment}</td>
+      `;
+      table.appendChild(tr);
+    });
+  } else {
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td colspan="3" style="text-align: center;">No comments yet</td>';
+    table.appendChild(tr);
+  }
+
+  dynCom.appendChild(table);
+
+  // Bouton de fermeture
+  const cross = document.createElement('i');
+  cross.classList.add('close', 'fa', 'fa-close');
+  
+  // Section de saisie des commentaires
+  const inpSect = document.createElement('div');
+  inpSect.classList.add('inpSect');
+  inpSect.innerHTML = `
+    <input type="text" class="inptxt" id="inpIdName" placeholder="Your Name" maxlength="15">
+    <input type="text" class="inptxt" id="revId" placeholder="Your Comment" maxlength="30">
+    <button id="submitBtn" class="subBtn">Submit</button>
+  `;
+
+  // Assembler tous les éléments
+  commentItems.appendChild(cross);
+  commentItems.appendChild(img);
+  commentItems.appendChild(commentContent);
+  commentContent.appendChild(movieInfo);
+  commentContent.appendChild(cCount);
+  commentItems.appendChild(inpSect);
+  commentItems.appendChild(dynCom);
+  commentContainer.appendChild(commentItems);
+  container.appendChild(commentContainer);
+
+  // Gestionnaire de fermeture
+  cross.onclick = () => {
+    commentContainer.remove();
+  };
+
+  // Gestionnaire de soumission des commentaires
   commentContainer.addEventListener('click', async (event) => {
-    const subId = event.target;
-    if (subId.id === 'submitBtn') {
+    if (event.target.id === 'submitBtn') {
       const userName = commentContainer.querySelector('#inpIdName');
       const userReview = commentContainer.querySelector('#revId');
-      // Call the function to submit the comment
-      await enterComments(mId, userName.value, userReview.value);
-      userName.value = '';
-      userReview.value = '';
-      const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-      await delay(500);
-      // Update the comment section dynamically with the newly entered comment
-      const newCommentData = await getComments(mId);
-      cCount.textContent = `Total Comments :${await countComments(mId)}`;
+      
+      if (userName.value && userReview.value) {
+        await enterComments(mId, userName.value, userReview.value);
+        
+        // Réinitialiser les champs
+        userName.value = '';
+        userReview.value = '';
+        
+        // Attendre un peu pour la mise à jour
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        // Mettre à jour les commentaires
+        const newCommentData = await getComments(mId);
+        const newCount = await countComments(mId);
+        cCount.textContent = `Total Comments: ${newCount}`;
 
-      while (tbl.lastElementChild) {
-        tbl.removeChild(tbl.lastElementChild);
+        // Mettre à jour la table
+        table.innerHTML = '';
+        table.appendChild(tableHeader);
+        
+        if (Array.isArray(newCommentData) && newCommentData.length > 0) {
+          newCommentData.forEach((comment) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td>${comment.creation_date}</td>
+              <td>${comment.username}</td>
+              <td>${comment.comment}</td>
+            `;
+            table.appendChild(tr);
+          });
+        }
       }
-      tbl.appendChild(trH);
-      newCommentData.forEach((newComment) => {
-        const tr = document.createElement('tr');
-        const dat = document.createElement('td');
-        const usr = document.createElement('td');
-        const com = document.createElement('td');
-        dat.textContent = newComment.creation_date;
-        usr.textContent = newComment.username;
-        com.textContent = newComment.comment;
-        tr.appendChild(dat);
-        tr.appendChild(usr);
-        tr.appendChild(com);
-        tbl.appendChild(tr);
-      });
     }
   });
-  // Append all elements to the comment container
-  commentItems.appendChild(img);
-  itemsSection.appendChild(nameTag);
-  itemsSection.appendChild(languageTag);
-  itemsSection.appendChild(brTag);
-  itemsSection.appendChild(genreTag);
-  commentItems.appendChild(inpSect);
-  commentItems.appendChild(itemsSection);
-  commentItems.appendChild(cCount);
-
-  commentContainer.appendChild(commentItems);
-  commentItems.appendChild(dynCom);
 };
 
 const comments = (id, image, name, genre, language) => {

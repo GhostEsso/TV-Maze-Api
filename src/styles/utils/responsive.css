@@ -1,0 +1,45 @@
+@media screen and (max-width: 1200px) {
+  .movies-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .movies-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .cItems {
+    width: 95%;
+    padding: var(--spacing-md);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .movies-container {
+    grid-template-columns: 1fr;
+  }
+  
+  header nav ul {
+    gap: var(--spacing-md);
+  }
+  
+  .cItems {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+  
+  .commentImg {
+    width: 150px;
+    height: 225px;
+  }
+  
+  .inptxt {
+    width: 100%;
+  }
+  
+  .dynCom {
+    font-size: 0.9rem;
+  }
+} 
